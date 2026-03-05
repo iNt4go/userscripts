@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Hyprland Streaming Prefix
 // @namespace    http://tampermonkey.net/
-// @downloadURL  
+// @downloadURL  https://github.com/iNt4go/userscripts/raw/refs/heads/main/Hyprland-StreamingPrefix/Hyprland-StreamingPrefix.user.js
 // @version      1.0
 // @description  Changes window title for streaming sites to enable Hyprland windowrules
 // @author       iNtago
