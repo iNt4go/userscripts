@@ -1,9 +1,10 @@
 // ==UserScript==
-// @name         Streaming Site Window Title
+// @name         Hyprland Streaming Prefix
 // @namespace    http://tampermonkey.net/
+// @downloadURL  
 // @version      1.0
 // @description  Changes window title for streaming sites to enable Hyprland windowrules
-// @author       You
+// @author       iNtago
 // @match        *://*.youtube.com/*
 // @match        *://plex.intago.me/*
 // @match        *://*.hbomax.com/*
