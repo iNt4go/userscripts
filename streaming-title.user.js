@@ -5,7 +5,7 @@
 // @description  Changes window title for streaming sites to enable Hyprland windowrules
 // @author       You
 // @match        *://*.youtube.com/*
-// @match        *://plex.*/*
+// @match        *://plex.intago.me/*
 // @match        *://*.hbomax.com/*
 // @match        *://*.hbo.com/*
 // @match        *://*.primevideo.com/*
@@ -19,6 +19,10 @@
 // @match        *://hulu.com/*
 // @match        *://*.crunchyroll.com/*
 // @match        *://*.paramountplus.com/*
+// @match        *://*.sankakucomplex.com/*
+// @match        *://*.nhentai.net/*
+// @match        *://*.romm.intago.me/*
+
 // @grant        none
 // @run-at       document-start
 // ==/UserScript==
