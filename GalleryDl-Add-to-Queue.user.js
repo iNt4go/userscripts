@@ -2,7 +2,7 @@
 // @name         Gallery-dl Add to Queue
 // @namespace    http://tampermonkey.net/
 // @downloadURL  https://github.com/iNt4go/userscripts/raw/refs/heads/main/GalleryDl-Add-to-Queue.user.js
-// @version      2026-06-22-1
+// @version      2026-06-22-2
 // @description  Add the current page URL to a gallery-dl staging queue via Tampermonkey context menu.
 // @author       iNtago
 // @match        *://*.youtube.com/*
@@ -11,6 +11,7 @@
 // @match        *://bunkr.cr/*
 // @grant        GM_download
 // @grant        GM_notification
+// @grant        GM_info
 // @run-at       context-menu
 // ==/UserScript==
 
@@ -47,41 +48,40 @@
         return `${DOWNLOAD_SUBDIR}/${stamp}__${host}__${pathPart}__${randomPart}.txt`;
     }
 
+    function notify(title, text, timeout = 3500) {
+        if (typeof GM_notification === 'function') {
+            GM_notification({ title, text, timeout });
+        }
+    }
+
     function queueCurrentUrl() {
         const currentUrl = new URL(location.href);
         const payload = `${currentUrl.href}\n`;
         const filename = buildFilename(currentUrl);
         const blob = new Blob([payload], { type: 'text/plain;charset=utf-8' });
-        const objectUrl = URL.createObjectURL(blob);
+
+        console.info('Gallery-dl Add to Queue', {
+            downloadMode: typeof GM_info === 'object' ? GM_info.downloadMode : 'unknown',
+            filename,
+            url: currentUrl.href,
+        });
 
         GM_download({
-            url: objectUrl,
+            url: blob,
             name: filename,
             saveAs: false,
             onload: () => {
-                URL.revokeObjectURL(objectUrl);
-                if (typeof GM_notification === 'function') {
-                    GM_notification({
-                        title: 'Gallery-dl queue',
-                        text: `Queued: ${currentUrl.href}`,
-                        timeout: 2500,
-                    });
-                }
+                notify('Gallery-dl queue', `Queued: ${currentUrl.href}`, 2500);
             },
             onerror: (error) => {
-                URL.revokeObjectURL(objectUrl);
+                const reason = error?.error || 'unknown';
+                const details = error?.details ? ` (${error.details})` : '';
                 console.error('Gallery-dl Add to Queue: download failed', error);
-                if (typeof GM_notification === 'function') {
-                    GM_notification({
-                        title: 'Gallery-dl queue',
-                        text: 'Failed to queue URL. Check Tampermonkey download settings.',
-                        timeout: 4000,
-                    });
-                }
+                notify('Gallery-dl queue', `Failed: ${reason}${details}`, 5000);
             },
             ontimeout: () => {
-                URL.revokeObjectURL(objectUrl);
                 console.error('Gallery-dl Add to Queue: download timed out');
+                notify('Gallery-dl queue', 'Failed: timeout', 5000);
             },
         });
     }
