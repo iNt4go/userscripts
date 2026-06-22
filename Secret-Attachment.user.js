@@ -1,6 +1,7 @@
 // ==UserScript==
 // @name         Secret Attachment
 // @namespace    http://tampermonkey.net/
+// @downloadurl  https://github.com/iNt4go/userscripts/raw/refs/heads/main/Secret-Attachment.user.js
 // @version      2025-03-29-patch-26
 // @description  Encrypt and embed a secret file via catbox.moe in 4chan posts, allowing others to decode and access the hidden content.
 // @author       anon

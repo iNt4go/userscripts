@@ -1,6 +1,7 @@
 // ==UserScript==
 // @name        megucascript for awoo
 // @namespace   megucasoft
+// @downloadurl  https://github.com/iNt4go/userscripts/raw/refs/heads/main/megucascript-for-awoo.user.js
 // @description Awoo extensions: commands, secret posting, music player, post formatting, post filters
 // @include     https://awoo.cf/*
 // @version     3.5.81
