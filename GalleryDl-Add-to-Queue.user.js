@@ -18,7 +18,7 @@
 (function () {
     'use strict';
 
-    const DOWNLOAD_SUBDIR = '-[Gallery-dl]/.gdlq';
+    const DOWNLOAD_SUBDIR = '-[Gallery-dl]/gdlq';
 
     function sanitize(value) {
         return value
